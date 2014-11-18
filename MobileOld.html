@@ -1,0 +1,228 @@
+﻿<html  xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>LSC Calendar</title>
+<meta name="viewport"    content="user-scalable=no, width=device-width" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<link rel="apple-touch-icon" href="icon.png" />
+<link rel="apple-touch-startup-image" href="start.png" />
+<script type="text/javascript">
+    function BlockMove(event) { event.preventDefault(); }
+
+    function goback() {
+        document.getElementById("content").style.display = "block";
+        document.getElementById("page").style.display = "none";
+        document.getElementById("back").style.display = "none";
+
+    }
+
+    function page(p) {
+        document.getElementById("content").style.display = "none";
+        document.getElementById("page").style.display = "block";
+        document.getElementById("back").style.display = "block";
+        var item = cal[p];
+        var s = "<div><p>" + item.Title + "</p>";
+        s += "<a target='_blank' href='http://reddit.com" + item.URL + "')\" class=\"button\">View Post</a>"
+        s += "<a target='_blank' href='calendar.ashx?ics=" + item.URL + "')\" class=\"button\">Add To Calendar</a></div>"
+        document.getElementById("page").innerHTML = s;
+
+    }
+    var cal;
+    var daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var request = new XMLHttpRequest();
+    function init() {
+        request.open("GET", "calendar.ashx?format=json", false);
+        request.send();
+        if (request.status == 200) {
+            var resp = request.responseText;
+            cal = eval('(' + resp + ')');
+            var s = "<ul>";
+            var tt = "";
+            var od = new Date();
+            od.setHours(0, 0, 0, 0);
+            for (var i = 0; i < cal.length; i++) {
+
+                var item = cal[i];
+
+                var dt = new Date(Number(item.Date.replace("/Date(", "").replace(")/", "")));
+                dt.setHours(0, 0, 0, 0);
+                if (dt >= od) {
+                    var t = "";
+
+                    if (dt.valueOf() == od.valueOf()) {
+                        t = "Today";
+                    }
+                    else if (dt.valueOf() < od.valueOf() + (1000 * 60 * 60 * 24 * 6)) {
+                        t = daysInWeek[dt.getDay()];
+                    }
+                    else {
+                        t = dt.toDateString();
+                    }
+
+
+                    if (t != tt) {
+                        tt = t;
+                        s += "<li class='sub'>" + tt + "</li>"
+                    }
+                    s += "<li><a href='#' onclick=\"page(" + i + ");return false;\">" + item.Title + "</a></li>"
+                }
+
+            }
+            s += "</ul>";
+            document.getElementById("content").innerHTML = s;
+
+
+        }
+    }
+</script> 
+<style type="text/css">
+html, body {
+   background: #ccc url(background.png);
+   background-repeat:repeat-x;
+   -webkit-text-size-adjust: none;
+
+   margin: 0;
+   padding: 0;
+   height: 100%;
+   font-family: Geneva, Arial, Helvetica;
+   }
+#footer
+{
+    position:absolute;
+    font: normal 10px Geneva, Arial, Helvetica, sans-serif; 
+    width:100%;
+    color:#999;
+    text-align:center;
+    bottom:10px;
+}
+#content
+{
+    height:80%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+#header
+{
+    font: bold 20px Geneva, Arial, Helvetica, sans-serif; 
+    width:100%;
+    text-align:center;
+    padding-top:15px;
+    padding-left:15%;
+    width:70%;
+    height:41px;
+    overflow:hidden;
+    
+}
+a
+    {
+            text-decoration: none;
+    color: #333;
+    display: block;
+    }
+.button {
+    font-family: Helvetica ;
+    font-weight: bold ;
+    padding: 15px; 
+    border: 1px solid black ;
+    -moz-border-radius: 8px ;
+    -webkit-border-radius: 8px ; 
+    margin-top: 10px ;
+    margin-bottom: 10px ;
+
+    background-color: white ;
+    text-align:center;
+    display: block;
+    text-decoration: none;
+    color: #333;
+}
+.sub
+{
+
+   font-size:10pt;
+   background-image: none;
+   background-color:#999;
+   color:#e9e9e9;
+   padding: 10px 5px 0px 10px;
+   height: 25px;
+}
+ul {
+   background-color: #e9e9e9;
+   border: 1px solid #ccc;
+   width: 95%;
+   display: block;
+   position: relative;
+   padding: 0; 
+   margin-left: auto;
+   margin-right: auto;
+   -webkit-border-radius: 12px;
+   }
+ul li {
+   color: #333;
+   font: bold 15px Geneva, Arial, Helvetica, sans-serif; 
+   vertical-align: middle;
+   border-bottom: 1px solid #ccc;
+   list-style-type: none;
+   text-align: left;
+   white-space: nowrap;
+   overflow: hidden;
+   height: 45px;
+   list-style-type: none; 
+   display: block;
+   padding: 0px 5px 5px 10px;
+   padding-right: 15px;
+
+   background-image: url(chevron.png);
+   background-position: right center;
+   background-repeat: no-repeat;
+
+   }
+ul li a{
+        height: 30px;
+        padding: 15px 5px 5px 10px;
+        text-overflow:ellipsis;
+        overflow:hidden;
+
+    }
+li:first-child { 
+   border-top: 0;
+   -webkit-border-top-left-radius: 12px;
+   -webkit-border-top-right-radius: 12px;
+   } 
+li:last-child { 
+   border-bottom: 0;
+   -webkit-border-bottom-left-radius: 12px;
+   -webkit-border-bottom-right-radius: 12px;
+   }
+   
+#back
+{
+    position:absolute;
+    left:10px;
+    top:13px;
+    height:30px;
+}
+#page 
+{
+    padding:15px 15px 0px 10px;
+    height:80%;
+    overflow:hidden;
+    
+}
+    
+
+
+
+</style>
+</head>
+<body onload="init();" ontouchmove="BlockMove(event);" >
+     <div id="header">LSC Calendar</div>
+     <div id="content">
+     </div>
+     <div id="page" style="display:none;">
+     </div>
+     <div id="footer">
+     barc0de
+    </div>
+    <a href="#"  onclick="goback();return false;"><img id="back" src="back.png" style="display:none" /></a>
+</body>
+</html>

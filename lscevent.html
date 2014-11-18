@@ -1,0 +1,19 @@
+﻿<div class="container" ng-controller="LSCEvent">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+
+        <div class="h4">{{event.title}} </div>
+
+        </div>
+        <div class="panel-body">
+        <p ng-bind-html="htmlDecode(event.selftext_html)"></p>
+        </div>
+        <table class="table">
+        <tr><td class="col-md-2">Posted By</td><td><a target="_blank" href="http://reddit.com/u/{{event.author}}">/u/{{event.author}}</a></td></tr>
+        <tr><td>Reddit Score</td><td>{{event.score}} ({{event.ups}}/{{event.downs}})</td></tr>
+        <tr><td>Comment Count</td><td>{{comments}}</td></tr>
+        </table>
+        <div class="list-group"><a class="list-group-item active text-center" target="_blank" href="{{event.url}}">Open Post</a></div>
+
+    </div>
+</div>

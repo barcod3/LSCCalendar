@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<ArrayOfEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Event>
+    <Title>Kurt Vile &amp;amp\; The Violators @ O2 Shepherd's Bush (ticket to go)</Title>
+    <Date>2013-12-11T00:00:00</Date>
+    <URL>/1smjgd</URL>
+    <IsNew>true</IsNew>
+    <IsDeleted>true</IsDeleted>
+    <Featured>false</Featured>
+    <IsBold>false</IsBold>
+  </Event>
+  <Event>
+    <Title>Visiting London with my family from the USA\, what cool things are</Title>
+    <Date>2013-12-18T00:00:00</Date>
+    <URL>/1spfmt</URL>
+    <IsNew>true</IsNew>
+    <IsDeleted>true</IsDeleted>
+    <Featured>false</Featured>
+    <IsBold>false</IsBold>
+  </Event>
+</ArrayOfEvent>
