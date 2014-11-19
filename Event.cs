@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +12,8 @@ using System.Text;
 using System.Xml.Serialization;
 
 using System.Web.Script.Serialization;
+
+using Newtonsoft.Json.Linq;
 
 namespace LSCAGENDA
 {
@@ -345,10 +347,17 @@ namespace LSCAGENDA
 
             Encoding iso = Encoding.GetEncoding("iso-8859-9");
             wc.Headers.Add(HttpRequestHeader.Cookie, "reddit_session=" + HttpUtility.UrlEncode(cookie, iso));
-            byte[] byteJsonResponse = wc.DownloadData("http://www.reddit.com/subreddits/mine/moderator.json" );
-            stringJsonResponse = System.Text.Encoding.UTF8.GetString(byteJsonResponse);
+            string XMLResponse = wc.DownloadString("http://www.reddit.com/subreddits/mine/moderator.xml");
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(XMLResponse);
+            var subs = doc.GetElementsByTagName("link");
+            foreach (XmlElement sub in subs)
+            {
+                if (sub.InnerText == "/r/LondonSocialClub/")
+                    return true;
+            }
 
-            return (stringJsonResponse.Contains("\"LondonSocialClub\""));
+            return false;
 
         }
 
