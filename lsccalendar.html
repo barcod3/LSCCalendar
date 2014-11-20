@@ -3,9 +3,9 @@
     <div class="panel panel-primary">
         <div class="panel-heading"><h4>Upcoming Events</h4></div>
 
-        <div class="list-group " ng-repeat="(key,value) in calendar | groupBy : 'DisplayDate'">
+        <div class="list-group " ng-repeat="(key,value) in calendar | filter: {DisplayDate:'!k:Past'} | groupBy : 'DisplayDate'  ">
             <h5 class="list-group-item disabled">{{displayDate(key)}}</h5>
-            <a href="#/events{{item.URL}}" ng-class="{'list-group-item-info' : item.IsBold==true}"  class="list-group-item"  ng-repeat="item in value">
+            <a href="#/events{{item.URL}}" ng-class="{'list-group-item-info' : item.IsBold==true}"  class="list-group-item"  ng-repeat="item in value  ">
                 
                 <h4 class="list-group-item-heading" >
                     {{item.Title}}
