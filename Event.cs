@@ -136,7 +136,7 @@ namespace LSCAGENDA
                     {
 
 
-                        ev.Description += line.Replace("DESCRIPTION:", "");
+                        ev.Description += System.Web.HttpUtility.HtmlDecode(line.Replace("DESCRIPTION:", ""));
                         line = str.ReadLine();
 
                     } while (!line.StartsWith("ORGANIZER"));
