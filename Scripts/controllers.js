@@ -34,9 +34,12 @@ LSCControllers.controller('LSCEvent', function ($scope, $http, $timeout, cfpLoad
     $scope.eventid = $routeParams.eventid;
     $scope.event = null;
     $scope.comments = null;
+    $scope.commentshow = false;
+    $scope.commentcount = 0;
+
 
     $scope.htmlDecode = function (input) {
-        if (input.length > 0) {
+        if (input != null && input.length > 0) {
             var e = document.createElement('div');
             e.innerHTML = input;
             return $sce.trustAsHtml(e.childNodes[0].nodeValue);
@@ -51,7 +54,8 @@ LSCControllers.controller('LSCEvent', function ($scope, $http, $timeout, cfpLoad
         $http.get("calendar.ashx?eventid=" + $scope.eventid).
             success(function (data, status, headers, config) {
                 $scope.event = data[0].data.children[0].data;
-                $scope.comments = data[0].data.children.length;
+                $scope.comments = data[1].data.children;
+                $scope.commentcount = data[1].data.children.length;
 
 
             }).
