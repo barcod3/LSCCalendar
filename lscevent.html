@@ -11,9 +11,26 @@
         <table class="table">
         <tr><td class="col-md-2">Posted By</td><td><a target="_blank" href="http://reddit.com/u/{{event.author}}">/u/{{event.author}}</a></td></tr>
         <tr><td>Reddit Score</td><td>{{event.score}} ({{event.ups}}/{{event.downs}})</td></tr>
-        <tr><td>Comment Count</td><td>{{comments}}</td></tr>
         </table>
-        <div class="list-group"><a class="list-group-item active text-center" target="_blank" href="{{event.url}}">Open Post</a></div>
+
+        <div class="list-group">
+        <a class="list-group-item " ng-click="commentshow = !commentshow">Comments ({{commentcount}})<span ng-hide="commentshow" class="glyphicon glyphicon-chevron-down pull-right" aria-hidden="true"></span><span ng-show="commentshow" class="glyphicon glyphicon-chevron-up pull-right" aria-hidden="true"></span></a>
+        
+
+        
+            <div class="list-group-item" ng-show="commentshow" ng-repeat="item in comments">
+   
+                <h5 class="list-group-item-heading" >
+                    {{item.data.body}}
+                </h5>
+                <p class="list-group-item-text small">
+                    /u/{{item.data.author}}<span ng-hide="item.data.replies == ''" class="badge pull-right">{{item.data.replies.data.children.length}}</span>
+                </p>
+            </div>
+        
+
+        <a class="list-group-item active text-center" target="_blank" href="{{event.url}}">Open Post</a>
+        </div>
 
     </div>
 </div>
