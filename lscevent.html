@@ -2,7 +2,7 @@
     <div class="panel panel-primary" ng-hide="event == null">
         <div class="panel-heading">
 
-        <div class="h4">{{event.title}} </div>
+        <div class="h4" ng-bind-html="displayTitle(event.title)"></div>
 
         </div>
         <div class="panel-body">
@@ -26,6 +26,7 @@
                 <p class="list-group-item-text small">
                     /u/{{item.data.author}}<span ng-hide="item.data.replies == ''" class="badge pull-right">{{item.data.replies.data.children.length}}</span>
                 </p>
+
             </div>
         
 
