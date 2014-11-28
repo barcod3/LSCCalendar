@@ -8,6 +8,11 @@ LSCControllers.controller('LSCCalendar', function ($scope, $http, $timeout, cfpL
         return displaydate.split(":")[1];
     }
 
+    $scope.displayTitle = function (title) {
+        var t = title.replace(/\\/g, "");
+        return $sce.trustAsHtml(t);
+    }
+
 
     var init = function () {
         $http.get("calendar.ashx?format=json").
@@ -47,6 +52,11 @@ LSCControllers.controller('LSCEvent', function ($scope, $http, $timeout, cfpLoad
         else {
             return "";
         }
+    }
+
+    $scope.displayTitle = function (title) {
+        var t = title.replace(/\\/g, "");
+        return $sce.trustAsHtml(t);
     }
 
 

@@ -5,10 +5,10 @@
 
         <div class="list-group " ng-repeat="(key,value) in calendar | filter: {DisplayDate:'!k:Past'} | groupBy : 'DisplayDate'  ">
             <h5 class="list-group-item disabled">{{displayDate(key)}}</h5>
-            <a href="#/events{{item.URL}}" ng-class="{'list-group-item-info' : item.IsBold==true}"  class="list-group-item"  ng-repeat="item in value  ">
+            <a href="#/events{{item.URL}}"   class="list-group-item "  ng-repeat="item in value  ">
                 
                 <h4 class="list-group-item-heading" >
-                    {{item.Title}}
+                    <span ng-bind-html="displayTitle(item.Title)">1234</span><span class="label pull-right" ng-show="IsNew">New</span>
                 </h4>
                 <p class="list-group-item-text">
                     {{item.Date | date : 'fullDate'}}
