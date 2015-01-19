@@ -7,7 +7,7 @@
             <h5 class="list-group-item disabled">{{displayDate(key)}}</h5>
             <a href="#/events{{item.URL}}"   class="list-group-item "  ng-repeat="item in value  ">
                 
-                <h4 class="list-group-item-heading" >
+                <h4 class="list-group-item-heading"  ng-class="{bold: item.IsBold}" >
                     <span ng-bind-html="displayTitle(item.Title)">1234</span><span class="label pull-right" ng-show="IsNew">New</span>
                 </h4>
                 <p class="list-group-item-text">

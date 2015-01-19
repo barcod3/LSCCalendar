@@ -24,3 +24,8 @@
 .slide.ng-leave-active {
     left: -100%;
 }
+
+.bold
+{
+    font-weight:bold;
+}
