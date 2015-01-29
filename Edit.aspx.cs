@@ -60,9 +60,11 @@ namespace LSCAGENDA
             var tbTitle = (TextBox)(e.Item.FindControl("tbTitle"));
             var cbFeatured = (CheckBox)(e.Item.FindControl("cbFeatured"));
             var cbDeleted = (CheckBox)(e.Item.FindControl("cbDeleted"));
+            var cbBold = (CheckBox)(e.Item.FindControl("cbBold"));
             var ev = (Event)events[e.Item.ItemIndex];
 
             ev.Title = tbTitle.Text;
+            ev.IsBold = cbBold.Checked;
             if (ev.IsDeleted != cbDeleted.Checked)
             {
                 ev.IsDeleted = cbDeleted.Checked;
