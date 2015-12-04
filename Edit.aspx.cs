@@ -143,6 +143,7 @@ namespace LSCAGENDA
 
         protected void btUpdate_Click(object sender, EventArgs e)
         {
+            Cache.Remove("Events");
             var settings = new Properties.Settings();
             bool r = Event.UpdateReddit(settings.AdminUser, settings.AdminPassword,tbCode.Text);
             if (r)
