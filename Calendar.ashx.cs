@@ -50,7 +50,20 @@ namespace LSCAGENDA
                 }
             }
 
-            var events = Event.GetEvents();
+            List<Event> events;
+            if (context.Cache["Events"] == null)
+            {
+                events = Event.GetEvents();
+                context.Cache.Insert("Events", events,
+                    null, DateTime.Now.AddHours(3),
+                    System.Web.Caching.Cache.NoSlidingExpiration);
+
+            }
+            else
+            {
+                events = (List<Event>)context.Cache["Events"];
+            }
+            
             if (ics != null)
             {
                 var ev = events.Single(e => e.URL == ics);
