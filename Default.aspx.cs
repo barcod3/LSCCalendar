@@ -62,6 +62,7 @@ namespace LSCAGENDA
 
         protected void btUpdate_Click(object sender, EventArgs e)
         {
+            Cache.Remove("Events");
             try
             {
                 var evs = Event.GetEvents();
