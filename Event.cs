@@ -413,7 +413,7 @@ namespace LSCAGENDA
             settingsdata.Add("show_media", "false");
             settingsdata.Add("sr", lscdata.data.name);
             settingsdata.Add("submit_link_label",lscdata.data.submit_link_label);
-            settingsdata.Add("submit_text_label", "");
+            settingsdata.Add("submit_text_label", lscdata.data.submit_text_label);
             settingsdata.Add("title", lscdata.data.title);
             settingsdata.Add("type", "public");
             settingsdata.Add("uh", modhash);
