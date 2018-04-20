@@ -51,12 +51,10 @@ namespace LSCAGENDA
             }
 
             List<Event> events;
-            if (context.Cache["Events"] == null)
+            if (!string.IsNullOrEmpty(context.Request.QueryString["force"]) || context.Cache["Events"] == null)
             {
                 events = Event.GetEvents();
-                context.Cache.Insert("Events", events,
-                    null, DateTime.Now.AddHours(3),
-                    System.Web.Caching.Cache.NoSlidingExpiration);
+                context.Cache.Insert("Events", events);
 
             }
             else

@@ -1,6 +1,6 @@
 var LSCControllers = angular.module('LSCControllers', []);
 
-LSCControllers.controller('LSCCalendar', function ($scope, $http, $timeout, cfpLoadingBar, $sce) {
+LSCControllers.controller('LSCCalendar', function ($scope,$rootScope, $http, $timeout, cfpLoadingBar, $sce) {
     $scope.calendar = null;
 
 
@@ -18,6 +18,16 @@ LSCControllers.controller('LSCCalendar', function ($scope, $http, $timeout, cfpL
         $http.get("calendar.ashx?format=json").
             success(function (data, status, headers, config) {
                 $scope.calendar = data;
+                $rootScope.showLoading = false
+                $http.get("calendar.ashx?format=json&force=true").
+                success(function (data, status, headers, config) {
+                    $scope.calendar = data;
+                    $rootScope.showLoading = true
+
+                }).
+                error(function (data, status, headers, config) {
+                    // log error
+                });
 
             }).
             error(function (data, status, headers, config) {
